@@ -18,7 +18,5 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose a port to Containers
-EXPOSE 8080
-
-# Command to run on server
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+EXPOSE 8000
+CMD ["uvicorn", "router.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -9,6 +9,8 @@ import numpy as np
 from dotenv import load_dotenv
 import os
 
+import uvicorn
+
 # Load environment variables from a .env file
 load_dotenv()
 
@@ -67,9 +69,11 @@ class Region(BaseModel):
 
 # Endpoint to recommend trees based on a region
 
+
 @app.get("/status")
 async def recommend_trees_status():
     return 'ok'
+
 
 @app.post("/recommend-trees", response_model=List[Tree])
 async def recommend_trees(region: Region):
@@ -97,3 +101,6 @@ async def recommend_trees(region: Region):
 
     # Return the recommended trees
     return result_trees
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
