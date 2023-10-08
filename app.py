@@ -67,6 +67,9 @@ class Region(BaseModel):
 
 # Endpoint to recommend trees based on a region
 
+@app.get("/status")
+async def recommend_trees_status():
+    return 'ok'
 
 @app.post("/recommend-trees", response_model=List[Tree])
 async def recommend_trees(region: Region):
