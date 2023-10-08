@@ -1,11 +1,19 @@
-FROM python:3.8-slim
+# Base Image
+FROM python:3.9-slim
 
+# Work directory
 WORKDIR /app
 
+# Copy requirements and install dependencies
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# Copy other project files
 COPY . .
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Expose a port to Containers
+EXPOSE 8080
 
-EXPOSE 5000
+# Command to run on server
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
 
-CMD ["python", "app.py"]
