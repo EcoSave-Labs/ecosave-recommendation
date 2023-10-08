@@ -58,7 +58,7 @@ def recommend_trees(region_size, region_soil_moisture):
     cluster_trees = cluster_trees.sort_values(
         by=['grow_space', 'ideal_soil_moisture'])
 
-    return cluster_trees[['name', 'type', 'recommended_quantity']]
+    return cluster_trees
 
 
 @app.route('/recommend-trees', methods=['POST'])
