@@ -8,6 +8,7 @@ from sklearn.cluster import KMeans
 import numpy as np
 from dotenv import load_dotenv
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 import uvicorn
 
@@ -16,6 +17,14 @@ load_dotenv()
 
 # Create a FastAPI instance
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Connect to the database
 conn = psycopg2.connect(
